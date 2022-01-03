@@ -1,16 +1,20 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { EntitiesModule } from '../entities/entities.module';
 import { AuthorizationLocalController } from './authorization-local.controller';
 import { AuthorizationLocalService } from './authorization-local.service';
 
 const providers = [AuthorizationLocalService];
+const controllers = [AuthorizationLocalController];
 
 @Module({})
 export class AuthorizationModule {
-    forFun(): DynamicModule {
+    static forFun(): DynamicModule {
         return {
             module: AuthorizationModule,
-            controllers: [AuthorizationLocalController],
-            providers
+            controllers,
+            providers,
+            imports: [EntitiesModule.forFun(), TypeOrmModule]
         };
     }
 }

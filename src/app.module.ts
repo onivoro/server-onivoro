@@ -4,15 +4,12 @@ import { AppController } from './app.controller';
 import { EntitiesModule } from './modules/entities/entities.module';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
 
-@Module({
-  imports: [AuthorizationModule]
-})
+@Module({})
 export class AppModule {
   static forRoot(dbConfig: any) {
 
-    console.log(dbConfig);
     return {
-      imports: [TypeOrmModule.forRoot(dbConfig), EntitiesModule.forFun()],
+      imports: [AuthorizationModule.forFun(), EntitiesModule.forFun(), TypeOrmModule.forRoot(dbConfig)],
       controllers: [AppController],
       providers: [        
       ],

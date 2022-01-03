@@ -16,7 +16,7 @@ export class AuthorizationLocalController {
     }
 
     @Post(AuthorizationLocalController.prototype.signup.name)
-    async signup() {
-        return await this.authService.signup();
+    async signup(@Body() body: AuthDto) {
+        return await this.authService.signup(body);
     }
 }

@@ -14,4 +14,8 @@ export class User {
     @ApiProperty()
     @Column({ type: 'varchar' })
     email!: string;
+
+    @ApiProperty()
+    @Column({ type: 'varchar' })
+    password!: string;
 }
