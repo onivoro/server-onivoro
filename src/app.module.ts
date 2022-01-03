@@ -3,8 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // import { createConnection } from 'typeorm';
 import { AppController } from './app.controller';
 import { EntitiesModule } from './entities/entities.module';
+import { AuthorizationModule } from './modules/authorization/authorization.module';
 
-@Module({})
+@Module({
+  imports: [AuthorizationModule]
+})
 export class AppModule {
   static forRoot(dbConfig: any) {
     return {
