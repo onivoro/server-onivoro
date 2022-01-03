@@ -1,26 +1,23 @@
 import { Body, Controller, Get, Put } from '@nestjs/common';
-// import { InjectConnection } from '@nestjs/typeorm';
-// import { Connection } from 'typeorm';
+import { UserService } from './entities/user.service';
 
 
 @Controller()
 export class AppController {
-  // constructor(@InjectConnection() private readonly connection: Connection) {}
+  constructor(
+    // @InjectConnection() private readonly connection: Connection,
+    private readonly svc: UserService) { }
 
   @Get()
-  get() {
+  async get() {
     const now = new Date().toISOString();
     console.log(now);
-    // const qr = this.connection.createQueryRunner();
-    // const result = qr.query(`select concat('hi', 'world')`);
-    return {now};
+    const posts = await this.svc.getUsers();
+    return { now, posts };
   }
 
   @Put()
-  put(@Body() body: any) {
-    console.log('request body', body, new Date().toISOString());
-    const res = {requestBody: body};
-    console.log(res);
-    return res;
+  async put(@Body() body: any) {
+    return await this.svc.creatUser(body);
   }
 }
