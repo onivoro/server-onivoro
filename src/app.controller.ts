@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { UserRepository } from './modules/entities/user.repository';
 
 
@@ -20,5 +20,11 @@ export class AppController {
   @Post()
   async post(@Body() body: any) {    
     return await this.svc.post([body]);
+  }
+
+  @Delete()
+  async delete() {    
+    const ids = (await this.svc.get()).map(u => u.id);
+    return await this.svc.delete(ids);
   }
 }

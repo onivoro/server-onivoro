@@ -8,6 +8,10 @@ export class User {
     id!: string;
 
     @ApiProperty()
-    @Column({type: 'jsonb'})
+    @Column({ type: 'jsonb' })
     data!: string;
+
+    @ApiProperty()
+    @Column({ type: 'varchar' })
+    email!: string;
 }

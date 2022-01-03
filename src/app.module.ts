@@ -9,6 +9,8 @@ import { AuthorizationModule } from './modules/authorization/authorization.modul
 })
 export class AppModule {
   static forRoot(dbConfig: any) {
+
+    console.log(dbConfig);
     return {
       imports: [TypeOrmModule.forRoot(dbConfig), EntitiesModule.forFun()],
       controllers: [AppController],

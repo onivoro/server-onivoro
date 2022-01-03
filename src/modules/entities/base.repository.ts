@@ -17,7 +17,7 @@ export abstract class BaseRepository<TEntity> {
     return await this.getRepository().insert(entities);
   }
 
-  async delete(id: string) {
+  async delete(id: string[]) {
     return await this.getRepository().delete(id);
   }
 
