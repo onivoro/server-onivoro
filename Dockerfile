@@ -3,6 +3,6 @@ USER node
 WORKDIR /home/node
 COPY --chown=node:node . /home/node
 ENV NODE_ENV=production
-RUN npm ci
+RUN npm i
 RUN npm run build
 CMD ["node", "dist/main.js"]
