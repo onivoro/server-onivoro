@@ -15,7 +15,6 @@ const dbConfig: PostgresConnectionOptions & {autoLoadEntities: boolean} = {
   password: process.env.DBPASSWORD,
   synchronize: process.env.DBSYNC === 'true',
   type: 'postgres',
-  entities: [__dirname + '/entities/**/*.entity{.ts}'],
   namingStrategy: new SnakeNamingStrategy(),
 };
 

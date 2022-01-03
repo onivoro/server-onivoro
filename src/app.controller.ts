@@ -1,14 +1,18 @@
 import { Body, Controller, Get, Put } from '@nestjs/common';
-import { AppService } from './app.service';
+// import { InjectConnection } from '@nestjs/typeorm';
+// import { Connection } from 'typeorm';
+
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  // constructor(@InjectConnection() private readonly connection: Connection) {}
 
   @Get()
   get() {
     const now = new Date().toISOString();
     console.log(now);
+    // const qr = this.connection.createQueryRunner();
+    // const result = qr.query(`select concat('hi', 'world')`);
     return {now};
   }
 
