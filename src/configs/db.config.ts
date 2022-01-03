@@ -15,6 +15,6 @@ export const dbConfig: PostgresConnectionOptions & { autoLoadEntities: boolean }
   type: 'postgres',
   namingStrategy: new SnakeNamingStrategy(),
   ssl: process.env.DBCERT
-    ? { ca: readFileSync(join(homedir(), process.env.DBCERT)) }
+    ? { ca: readFileSync(join(homedir(), process.env.DBCERT), 'utf-8') }
     : undefined
 };

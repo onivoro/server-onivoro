@@ -1,26 +1,14 @@
 import { NestFactory } from '@nestjs/core';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { AppModule } from './app.module';
 import { config } from 'dotenv';
-
 config();
 
-const dbConfig: PostgresConnectionOptions & {autoLoadEntities: boolean} = {
-  autoLoadEntities: true,
-  database: process.env.DATABASE,
-  host: process.env.DBHOST,
-  port: +(process.env.DBPORT || 5432),
-  username: process.env.DBUSERNAME,
-  password: process.env.DBPASSWORD,
-  synchronize: process.env.DBSYNC === 'true',
-  type: 'postgres',
-  namingStrategy: new SnakeNamingStrategy(),
-};
-
+import { AppModule } from './app.module';
+import { dbConfig } from './configs/db.config';
+const port = process.env.PORT || 3336;
+console.log(port, dbConfig);
 async function bootstrap() {
   const app = await NestFactory.create(AppModule.forRoot(dbConfig));
   app.enableShutdownHooks();
-  await app.listen(process.env.PORT);
+  await app.listen(port);
 }
 bootstrap();

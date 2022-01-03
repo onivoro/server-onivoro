@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { createConnection } from 'typeorm';
 // import { createConnection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -14,12 +15,13 @@ export class AppModule {
       controllers: [AppController],
       providers: [
         AppService,        
-        // {
-        //   provide: 'DATABASE_CONNECTION',
-        //   useFactory: async () => await createConnection(dbConfig),
-        // },
+        {
+          provide: 'DATABASE_CONNECTION',
+          useFactory: async () => await createConnection(dbConfig),
+        },
       ],
-      module: AppModule
+      module: AppModule,
+      exports: [TypeOrmModule]
     };
   }
 }
