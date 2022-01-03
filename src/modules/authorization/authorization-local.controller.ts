@@ -19,4 +19,9 @@ export class AuthorizationLocalController {
     async signup(@Body() body: AuthDto) {
         return await this.authService.signup(body);
     }
+
+    @Post(AuthorizationLocalController.prototype.signout.name)
+    async signout() {
+        return await this.authService.signout();
+    }
 }
