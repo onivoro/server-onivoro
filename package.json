@@ -1,11 +1,10 @@
 {
-  "name": "crowsnest",
+  "name": "server-onivoro",
   "version": "1.0.0",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "main": "dist/app.module.js",
   "scripts": {
     "prebuild": "rimraf dist",
     "tsbuild": "rm -rf dist && tsc -p tsconfig.build.json",
