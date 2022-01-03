@@ -4,17 +4,22 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntitiesModule } from '../entities/entities.module';
 import { AuthorizationLocalController } from './authorization-local.controller';
 import { AuthorizationLocalService } from './authorization-local.service';
+import { JwtStrategy } from './jwt.strategy';
 
-const providers = [AuthorizationLocalService];
+const providers = [AuthorizationLocalService, JwtStrategy];
 const controllers = [AuthorizationLocalController];
 
 @Module({})
 export class AuthorizationModule {
-    static forRoot({ secret }: { secret: string }): DynamicModule {
+    static forRoot(authConfig: { secret: string }): DynamicModule {
+        const { secret } = authConfig;
+
         return {
             module: AuthorizationModule,
             controllers,
-            providers,
+            providers: [...providers,
+            { provide: 'authConfig', useValue: authConfig }
+            ],
             imports: [EntitiesModule.forFun(), TypeOrmModule, JwtModule.register({ secret })]
         };
     }

@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { UserRepository } from './modules/entities/user.repository';
 
 
@@ -7,6 +8,7 @@ export class AppController {
   constructor(
     private readonly svc: UserRepository) { }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async get() {
     return await this.svc.get();
@@ -18,12 +20,12 @@ export class AppController {
   }
 
   @Post()
-  async post(@Body() body: any) {    
+  async post(@Body() body: any) {
     return await this.svc.post([body]);
   }
 
   @Delete()
-  async delete() {    
+  async delete() {
     const ids = (await this.svc.get()).map(u => u.id);
     return await this.svc.delete(ids);
   }

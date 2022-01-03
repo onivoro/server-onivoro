@@ -4,7 +4,11 @@ import { homedir } from 'os';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 
-export const dbConfig: PostgresConnectionOptions & { autoLoadEntities: boolean } = {
+export interface IDbConfig extends PostgresConnectionOptions {
+  autoLoadEntities: boolean;
+};
+
+export const dbConfig: IDbConfig = {
   autoLoadEntities: true,
   database: process.env.DATABASE,
   host: process.env.DBHOST,
