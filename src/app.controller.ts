@@ -1,23 +1,24 @@
-import { Body, Controller, Get, Put } from '@nestjs/common';
-import { UserService } from './entities/user.service';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { UserRepository } from './entities/user.repository';
 
 
 @Controller()
 export class AppController {
   constructor(
-    // @InjectConnection() private readonly connection: Connection,
-    private readonly svc: UserService) { }
+    private readonly svc: UserRepository) { }
 
   @Get()
   async get() {
-    const now = new Date().toISOString();
-    console.log(now);
-    const posts = await this.svc.getUsers();
-    return { now, posts };
+    return await this.svc.get();
   }
 
   @Put()
   async put(@Body() body: any) {
-    return await this.svc.creatUser(body);
+    return await this.svc.put([body]);
+  }
+
+  @Post()
+  async post(@Body() body: any) {    
+    return await this.svc.post([body]);
   }
 }

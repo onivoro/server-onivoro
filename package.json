@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
     "@nestjs/typeorm": "^8.0.2",
+    "@onivoro/isomorphic-crud-provider": "^0.50.0",
     "@onivoro/isomorphic-seo": "^0.27.0",
     "dotenv": "^10.0.0",
     "express-jwt": "^6.1.0",
