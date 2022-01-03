@@ -4,9 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { EntitiesModule } from './entities/entities.module';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
+import { DatabaseModule } from './modules/database/database.module';
 
 @Module({
-  imports: [AuthorizationModule]
+  imports: [AuthorizationModule, DatabaseModule]
 })
 export class AppModule {
   static forRoot(dbConfig: any) {
